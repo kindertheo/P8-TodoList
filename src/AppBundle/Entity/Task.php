@@ -43,6 +43,7 @@ class Task
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="tasks")
      */
+    
     private $author;
 
     public function __construct()

@@ -42,6 +42,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="author")
      */
+
     private $tasks;
 
     public function getId()
