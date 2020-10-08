@@ -41,7 +41,7 @@ class Task
     private $isDone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\user", inversedBy="tasks")
      */
     
     private $author;
