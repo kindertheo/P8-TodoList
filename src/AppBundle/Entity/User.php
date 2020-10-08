@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -114,11 +115,11 @@ class User implements UserInterface
     /**
      * Add task.
      *
-     * @param \App\Entity\Task $task
+     * @param Task $task
      *
      * @return User
      */
-    public function addTask(\App\Entity\Task $task)
+    public function addTask(Task $task)
     {
         $this->tasks[] = $task;
 
@@ -128,11 +129,11 @@ class User implements UserInterface
     /**
      * Remove task.
      *
-     * @param \App\Entity\Task $task
+     * @param Task $task
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeTask(\App\Entity\Task $task)
+    public function removeTask(Task $task)
     {
         return $this->tasks->removeElement($task);
     }
@@ -140,7 +141,7 @@ class User implements UserInterface
     /**
      * Get tasks.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getTasks()
     {
@@ -171,3 +172,6 @@ class User implements UserInterface
         return $this->userRole;
     }
 }
+
+
+/*TODO ACCESS DENIED PAGE CODE 403*/
