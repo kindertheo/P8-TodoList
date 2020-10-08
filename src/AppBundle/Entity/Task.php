@@ -41,7 +41,7 @@ class Task
     private $isDone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\user", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
      */
     
     private $author;
@@ -124,11 +124,11 @@ class Task
     /**
      * Set author.
      *
-     * @param \App\Entity\user|null $author
+     * @param \AppBundle\Entity\User|null $author
      *
      * @return Task
      */
-    public function setAuthor(\App\Entity\user $author = null)
+    public function setAuthor(\AppBundle\Entity\User $author = null)
     {
         $this->author = $author;
 
@@ -138,7 +138,7 @@ class Task
     /**
      * Get author.
      *
-     * @return \App\Entity\user|null
+     * @return \AppBundle\Entity\user|null
      */
     public function getAuthor()
     {
