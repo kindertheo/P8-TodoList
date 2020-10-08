@@ -42,8 +42,12 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="author")
      */
-
     private $tasks;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $userRole;
 
     public function getId()
     {
@@ -87,7 +91,13 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $roles[] = $this->userRole;
+
+        if (!in_array('ROLE_USER', $roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return $roles;
     }
 
     public function eraseCredentials()
@@ -135,5 +145,29 @@ class User implements UserInterface
     public function getTasks()
     {
         return $this->tasks;
+    }
+
+    /**
+     * Set userRole.
+     *
+     * @param string $userRole
+     *
+     * @return User
+     */
+    public function setUserRole($userRole)
+    {
+        $this->userRole = $userRole;
+
+        return $this;
+    }
+
+    /**
+     * Get userRole.
+     *
+     * @return string
+     */
+    public function getUserRole()
+    {
+        return $this->userRole;
     }
 }
