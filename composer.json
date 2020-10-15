@@ -17,6 +17,7 @@
     "php": ">=5.5.9",
     "doctrine/doctrine-bundle": "^1.6",
     "doctrine/orm": "^2.5",
+    "fzaninotto/faker": "^1.9",
     "incenteev/composer-parameter-handler": "^2.0",
     "sensio/framework-extra-bundle": "^5.0.0",
     "symfony/asset": "^5.1",
@@ -47,6 +48,11 @@
     "symfony/web-profiler-bundle": "^5.0"
   },
   "scripts": {
+    "prepare": [
+      "php bin/console doctrine:schema:drop --force",
+      "php bin/console doctrine:schema:create",
+      "php bin/console doctrine:fixtures:load --no-interaction"
+    ],
     "symfony-scripts": [
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
