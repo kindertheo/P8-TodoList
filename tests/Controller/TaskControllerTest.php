@@ -4,6 +4,7 @@
 namespace Tests\App\Controller;
 
 
+use App\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Link;
 
@@ -56,6 +57,8 @@ class TaskControllerTest extends WebTestCase
             "task[content]" => ""
         ]);
 
+        $uri = $client->getRequest()->getRequestUri();
+        $this->assertEquals("/tasks/create", $uri);
         $this->assertSelectorNotExists("div.alert", "Superbe !");
     }
     /**
@@ -78,6 +81,9 @@ class TaskControllerTest extends WebTestCase
         ]);
 
         $client->followRedirect();
+
+        $uri = $client->getRequest()->getRequestUri();
+        $this->assertEquals("/tasks", $uri);
         $this->assertSelectorTextContains("div.alert", "Superbe !");
     }
     /**
@@ -91,6 +97,8 @@ class TaskControllerTest extends WebTestCase
         $crawler = $client->request("GET", "/tasks");
 
         $task = $crawler->filter("div.col-sm-4:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h4:nth-child(2) > a:nth-child(1)")->link();
+
+        $this->assertNotEquals(null, $task);
 
         $client->click($task);
 
@@ -115,10 +123,23 @@ class TaskControllerTest extends WebTestCase
             ->selectButton("Marquer comme faite")
             ->eq(0)
             ->form();
+
+        /*Get ID of the task*/
+        preg_match('/[0-9]{1,3}/', $form->getUri(), $taskId);
+
         $client->submit($form);
 
         $client->followRedirect();
 
+        $entityManager = $client->getContainer()
+            ->get('doctrine')
+            ->getManager();
+
+        $task = $entityManager->getRepository(Task::class)
+            ->findOneBy(['id' => $taskId[0]]);
+
+        $this->assertNotEquals(null, $task);
+        $this->assertEquals(true, $task->isDone());
         $this->assertSelectorTextContains("div.alert", "Superbe !");
     }
     /**
@@ -135,10 +156,20 @@ class TaskControllerTest extends WebTestCase
             ->selectButton("Supprimer")
             ->eq(2)
             ->form();
-        $client->submit($form);
 
+        preg_match('/[0-9]{1,3}/', $form->getUri(), $taskId);
+
+        $client->submit($form);
         $client->followRedirect();
 
+        $entityManager = $client->getContainer()
+            ->get('doctrine')
+            ->getManager();
+
+        $task = $entityManager->getRepository(Task::class)
+            ->findOneBy(['id' => $taskId[0]]);
+
+        $this->assertEquals(null, $task);
         $this->assertSelectorTextContains("div.alert", "Superbe !");
     }
 
