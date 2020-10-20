@@ -16,6 +16,18 @@ class UserControllerTest extends WebTestCase
         parent::__construct($name, $data, $dataName);
         $this->faker = Faker\Factory::create();
     }
+    /**
+     * @covers \App\Controller\UserController::listAction
+     */
+    public function testListAction(){
+        $client = static::createClient();
+
+        $this->loginAdmin($client);
+
+        $client->request('GET', '/users');
+
+        $this->assertSelectorTextContains("h1", "Liste des utilisateurs");
+    }
 
     /**
      * @covers \App\Controller\UserController::createAction
