@@ -8,6 +8,11 @@ use App\Entity\Task;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @covers \App\Entity\Task
+ * Class TaskTest
+ * @package App\Tests\Entity
+ */
 class TaskTest extends WebTestCase
 {
     private $task;
@@ -54,5 +59,18 @@ class TaskTest extends WebTestCase
         $this->task->setAuthor(new User());
         $this->assertInstanceOf(User::class, $this->task->getAuthor());
     }
+
+    public function testSetIsDone(): void
+    {
+        $this->task->setIsDone(true);
+        $this->assertEquals(true, $this->task->isDone());
+    }
+
+    public function testGetIsDone(): void
+    {
+        $this->assertIsBool($this->task->getIsDone());
+    }
+
+
 
 }

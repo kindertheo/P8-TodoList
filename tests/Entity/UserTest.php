@@ -4,8 +4,14 @@ namespace App\Tests\Entity;
 
 use App\Entity\Task;
 use App\Entity\User;
+use phpDocumentor\Reflection\Types\Void_;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @covers \App\Entity\User
+ * Class UserTest
+ * @package App\Tests\Entity
+ */
 class UserTest extends WebTestCase
 {
     private $user;
@@ -68,6 +74,19 @@ class UserTest extends WebTestCase
     public function testEraseCredential(): void
     {
         $this->assertNull($this->user->eraseCredentials());
+    }
+
+    public function testSetUserRole(): void
+    {
+        $user = new User();
+        $this->assertEquals("ROLE_USER", $user->setUserRole("ROLE_USER")->getUserRole());
+    }
+
+    public function testGetUserRole(): void
+    {
+        $user = new User();
+        $user->setUserRole("ROLE_USER");
+        $this->assertEquals("ROLE_USER", $user->getUserRole());
     }
 
 }
