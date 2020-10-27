@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
+/**
+ * @covers \App\Security\UserTaskVoter
+ * Class UserTaskVoterTest
+ */
 class UserTaskVoterTest extends WebTestCase
 {
     private $task;
@@ -87,6 +91,49 @@ class UserTaskVoterTest extends WebTestCase
             $attribute = 'edit',
             UserTaskVoter::ACCESS_DENIED,
         ];
+
+        yield "User peut voir ses taches" => [
+            $user = $this->createUser("user1"),
+            $task = $this->createTask($user),
+            $attribute = 'view',
+            UserTaskVoter::ACCESS_GRANTED,
+        ];
+
+        yield "Admin peut voir les taches" => [
+            $this->createUserRoles("user3", "ROLE_ADMIN"),
+            $task = $this->createTask(null),
+            $attribute = 'view',
+            UserTaskVoter::ACCESS_GRANTED
+        ];
+
+        yield "Utilisateur n'est pas un utilisateur" => [
+            $user = "",
+            $task = $this->createTask(null),
+            $attribute = "view",
+            UserTaskVoter::ACCESS_DENIED
+        ];
+
+        yield "Utilisateur ne peut pas voir" => [
+            $this->createUser("user3"),
+            $task = $this->createTask(null),
+            $attribute = 'view',
+            UserTaskVoter::ACCESS_DENIED
+        ];
+
+        yield "Tache n'est pas une tache" => [
+            $this->createUserRoles("user3", "ROLE_ADMIN"),
+            $task = "",
+            $attribute = 'view',
+            UserTaskVoter::ACCESS_ABSTAIN
+        ];
+
+        yield "Mauvais attribut" => [
+            $this->createUserRoles("user3", "ROLE_ADMIN"),
+            $task = $this->createTask(null),
+            $attribute = "dazdza",
+            UserTaskVoter::ACCESS_ABSTAIN
+        ];
+
     }
 
     /**
@@ -99,9 +146,9 @@ class UserTaskVoterTest extends WebTestCase
 
     public function testVote(
         $user,
-        Task $task,
+        $task,
         string $attribute,
-        int $expectedVote): void
+        $expectedVote): void
     {
 
         $token = new AnonymousToken('secret', 'anonymous');
@@ -113,4 +160,6 @@ class UserTaskVoterTest extends WebTestCase
 
         $this->assertSame($expectedVote, $this->voter->vote($token, $task, [$attribute]));
     }
+
+
 }
