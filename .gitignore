@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/linux,phpstorm,symfony
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,phpstorm,symfony
 
@@ -195,3 +194,6 @@ fabric.properties
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+
+/tests/coverage

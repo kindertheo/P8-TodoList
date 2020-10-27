@@ -17,6 +17,7 @@
     "php": ">=5.5.9",
     "doctrine/doctrine-bundle": "^1.6",
     "doctrine/orm": "^2.5",
+    "fzaninotto/faker": "^1.9",
     "incenteev/composer-parameter-handler": "^2.0",
     "sensio/framework-extra-bundle": "^5.0.0",
     "symfony/asset": "^5.1",
@@ -37,16 +38,22 @@
     },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.3",
+    "symfony/browser-kit": "^5.1",
+    "symfony/css-selector": "^5.1",
     "symfony/dotenv": "^5.1",
     "symfony/maker-bundle": "^1.21",
-    "symfony/phpunit-bridge": "^3.0",
+    "symfony/phpunit-bridge": "^5.1",
     "symfony/stopwatch": "^5.1",
     "symfony/twig-bundle": "^4.4",
     "symfony/web-profiler-bundle": "^5.0"
   },
   "scripts": {
+    "prepare": [
+      "php bin/console doctrine:schema:drop --force",
+      "php bin/console doctrine:schema:create",
+      "php bin/console doctrine:fixtures:load --no-interaction"
+    ],
     "symfony-scripts": [
-      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
@@ -71,15 +78,12 @@
     "sort-packages": true
   },
   "extra": {
-    "symfony-app-dir": "app",
+    "symfony-app-dir": "src",
     "symfony-bin-dir": "bin",
     "symfony-var-dir": "var",
     "symfony-web-dir": "web",
     "symfony-tests-dir": "tests",
     "symfony-assets-install": "relative",
-    "incenteev-parameters": {
-      "file": "app/config/parameters.yml"
-    },
     "branch-alias": {
       "dev-master": "3.4-dev"
     }

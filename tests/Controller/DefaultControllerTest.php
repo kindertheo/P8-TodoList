@@ -7,16 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    /**
+     * @covers \App\Controller\DefaultController::indexAction
+     */
+    public function testIndexAction()
     {
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/');
-        $crawler = $client->followRedirect();
-
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('Créer un utilisateur', $crawler->filter('.btn.btn-primary')->text());
+        $this->assertStringContainsString('Créer un utilisateur', $crawler->filter('.btn.btn-primary')->text());
     }
 }
