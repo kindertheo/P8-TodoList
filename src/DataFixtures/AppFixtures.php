@@ -9,6 +9,11 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * @codeCoverageIgnore
+ * Class AppFixtures
+ * @package App\DataFixtures
+ */
 class AppFixtures extends Fixture
 {
     private $encoder;
