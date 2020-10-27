@@ -9,6 +9,11 @@ use App\Entity\Task;
 use App\Form\TaskType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * @covers \App\Form\TaskType
+ * Class TaskTypeTest
+ * @package App\Tests\Form
+ */
 class TaskTypeTest extends TypeTestCase
 {
     public function testSubmitValidDataTaskType(): void

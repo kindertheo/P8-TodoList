@@ -10,6 +10,11 @@ use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
 
+/**
+ * @covers \App\Form\UserType
+ * Class UserTypeTest
+ * @package App\Tests\Form
+ */
 class UserTypeTest extends TypeTestCase
 {
     protected function getExtensions(): array
