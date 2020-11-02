@@ -95,9 +95,6 @@
     "nikic/php-parser": {
         "version": "v4.10.2"
     },
-    "paragonie/random_compat": {
-        "version": "v9.99.99"
-    },
     "php": {
         "version": "7.4.3"
     },
@@ -126,7 +123,7 @@
         "version": "v6.2.3"
     },
     "symfony/asset": {
-        "version": "v4.4.15"
+        "version": "v5.1.8"
     },
     "symfony/browser-kit": {
         "version": "v5.1.7"
@@ -298,9 +295,6 @@
         "version": "v1.18.1"
     },
     "symfony/polyfill-mbstring": {
-        "version": "v1.18.1"
-    },
-    "symfony/polyfill-php70": {
         "version": "v1.18.1"
     },
     "symfony/polyfill-php72": {
