@@ -1,4 +1,6 @@
 # ToDoList #
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/30955ec18a0940f180eb079d593b193e)](https://www.codacy.com/gh/kindertheo/P8-TodoList/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kindertheo/P8-TodoList&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f94474dd93c5cd7925bc/maintainability)](https://codeclimate.com/github/kindertheo/P8-TodoList/maintainability)
 
 ## Description du besoin ##
 
