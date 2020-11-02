@@ -57,15 +57,14 @@ Vous prévoirez des données de tests afin de pouvoir prouver le fonctionnement 
 ```
     composer install
 ```
-
-4.1 Mettre en place la BDD :
+4. Mettre en place la BDD :
 ```
     php bin/console doctrine:database:create
     php bin/console doctrine:migrations:migrate
     php bin/console doctrine:fixtures:load
 ```
-
-4.2 ou 
+ou 
 ```
     composer prepare
 ```
+****
