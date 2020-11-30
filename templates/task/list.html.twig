@@ -8,7 +8,7 @@
     </div>
 
     <br />
-    
+
     <div class="row">
         {% for task in tasks %}
         <div class="col-sm-4 col-lg-4 col-md-4">
@@ -19,7 +19,13 @@
                     </h4>
                     <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
                     <p>{{ task.content }}</p>
-                    <p>{{ task.author.username }}</p>
+
+
+                    {% if task.author.username is defined and task.author.username is not null %}
+                        <p>{{ task.author.username }}</p>
+                    {% else %}
+                        <p>Anonyme</p>
+                    {% endif %}
                 </div>
                 <div>
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
