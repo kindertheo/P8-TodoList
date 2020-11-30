@@ -64,6 +64,6 @@ class SecurityControllerTest extends WebTestCase
         $client->clickLink("Se déconnecter");
         $client->followRedirect();
 
-        $this->assertSelectorExists("a.btn-success:nth-child(2)", "Se connecter");
+        $this->assertSelectorExists("a.btn-success", "Se connecter");
     }
 }
