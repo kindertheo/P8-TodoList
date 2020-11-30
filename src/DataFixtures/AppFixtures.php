@@ -39,7 +39,18 @@ class AppFixtures extends Fixture
 
         $manager->persist($userAdmin);
 
-        $users[] = $userAdmin;
+        $userUser = new User();
+
+        $userUser->setEmail("user@user.com");
+        $userUser->setUsername("user");
+        $userUser->setPassword($this->encoder->encodePassword($userUser, "password"));
+        $userUser->setUserRole("ROLE_USER");
+
+        $manager->persist($userUser);
+
+        $users = [];
+        array_push($users, $userAdmin, $userUser);
+        //$users[] = $userAdmin $userUser;
 
         for($j = 0; $j < 5; $j++){
             $user = new User();
