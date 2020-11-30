@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
 
         $users[] = $userAdmin;
 
-        for($j = 0; $j < 10; $j++){
+        for($j = 0; $j < 5; $j++){
             $user = new User();
 
             $user->setUsername($faker->userName);
@@ -54,16 +54,28 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
-        for($i = 0; $i < 20; $i++){
+        for($i = 0; $i < 5; $i++){
             $task = new Task();
 
             $task->setAuthor( $users[random_int(0, count($users) - 1) ]);
             $task->setIsDone(false);
-            $task->setCreatedAt($faker->dateTime("-8 hours"));
+            $task->setCreatedAt( $faker->dateTime("-8 hours") );
             $task->setTitle($faker->word());
             $task->setContent($faker->paragraph(2));
 
             $manager->persist($task);
+        }
+
+        for($f = 0; $f < 3; $f++){
+            $anonTask = new Task();
+
+            $anonTask->setIsDone(false);
+            $anonTask->setCreatedAt( $faker->dateTime("-8 hours") );
+            $anonTask->setContent($faker->paragraph(2));
+            $anonTask->setTitle($faker->word());
+            $anonTask->setAuthor(null);
+
+            $manager->persist($anonTask);
         }
 
 
