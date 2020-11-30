@@ -38,9 +38,11 @@
         <!-- Page Content -->
         <div class="container">
             <div class="row">
+                {% if app.user %}
                 <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
 
-                {% if app.user %}
+                <a href="{{ path('user_list') }}" class="btn btn-warning">Liste des utilisateurs</a>
+
                 <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
                 {% endif %}
 
@@ -48,6 +50,8 @@
                 <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
                 {% endif %}
             </div>
+
+            <br />
 
             <div class="row">
                 <div class="col-md-12">
