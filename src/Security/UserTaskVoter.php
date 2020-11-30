@@ -17,7 +17,7 @@ class UserTaskVoter extends Voter
     protected function supports($attribute, $subject)
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, array(self::VIEW, self::EDIT))) {
+        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::DELETE))) {
             return false;
         }
 
@@ -80,11 +80,7 @@ class UserTaskVoter extends Voter
     {
         // this assumes that the data object has a getOwner() method
         // to get the entity of the user who owns this data object
-        if(
-            $user === $task->getAuthor() 
-            OR $user->getUserRole() === "ROLE_ADMIN"
-            OR $post->getAuthor === null && $user->getUserRole() === "ROLE_ADMIN")
-        {
+        if($user === $task->getAuthor() OR $user->getUserRole() === "ROLE_ADMIN"){
             return true;
         }
         return false;
