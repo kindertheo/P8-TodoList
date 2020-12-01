@@ -180,6 +180,7 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/linux,phpstorm,symfony
 
 ###> symfony/framework-bundle ###
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
