@@ -1,19 +1,14 @@
-"language": "php",
-"os": [
-  "linux"
-],
-"dist": "xenial",
-"php": [
-  "7.4"
-],
-"services": [
-  "mysql"
-],
-"before_install": [
-  "mysql -e 'CREATE DATABASE TodoList;'"
-],
-"script": [
-  "composer install",
-  "composer prepare",
-  "vendor/bin/phpunit"
-]
+before_install: 
+  - "mysql -e 'CREATE DATABASE TodoList;'"
+dist: xenial
+language: php
+os: 
+  - linux
+php: 
+  - "7.4"
+script: 
+  - "composer install"
+  - "composer prepare"
+  - vendor/bin/phpunit
+services: 
+  - mysql
