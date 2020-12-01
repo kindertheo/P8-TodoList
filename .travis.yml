@@ -15,4 +15,5 @@ services:
   - mysql
 script:
     - composer dump-env test
-    - phpunit --coverage-text --colors -c phpunit.xml
+    - phpunit --migrate-configuration
+    - phpunit 
