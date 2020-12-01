@@ -6,10 +6,11 @@ os:
   - linux
 php: 
   - "7.4"
-script: 
-  - "composer install"
-  - php bin/console doctrine:fixtures:load
-  - vendor/bin/phpunit
+install:
+    - composer install --prefer-dist --no-interaction
+    - php bin/console doctrine:database:create --env=test
+    - php bin/console doctrine:schema:update --force --env=test
+    - php bin/console doctrine:fixtures:load -n --env=test
 services: 
   - mysql
 
