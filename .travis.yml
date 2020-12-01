@@ -14,4 +14,4 @@ install:
 services: 
   - mysql
 script:
-    - phpunit --coverage-text --colors -c phpunit.xml.bak
+    - phpunit --coverage-text --colors -c phpunit.xml
