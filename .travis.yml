@@ -13,4 +13,5 @@ install:
     - php bin/console doctrine:fixtures:load -n --env=test
 services: 
   - mysql
-
+script:
+    - ./vendor/bin/simple-phpunit --coverage-text --colors 
