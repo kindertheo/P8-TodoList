@@ -14,6 +14,6 @@ install:
 services: 
   - mysql
 script:
-    - composer dump-env test
+    - composer dump-env prod
     - phpunit --migrate-configuration
     - phpunit 
