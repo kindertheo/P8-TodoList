@@ -13,5 +13,8 @@ script:
 services: 
   - mysql
 
-
-  
+env:
+  global:
+    - DB_NAME=TodoList
+    - DB_USER=travis
+    - DB_PASSWORD=
