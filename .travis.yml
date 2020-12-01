@@ -14,4 +14,4 @@ install:
 services: 
   - mysql
 script:
-    - phpunit --coverage-text --colors 
+    - phpunit /tests/Controller/DefaultControllerTest.php --coverage-text --colors 
