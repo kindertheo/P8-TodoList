@@ -14,4 +14,5 @@ install:
 services: 
   - mysql
 script:
-    - phpunit tests/Controller/DefaultControllerTest.php --coverage-text --colors -c phpunit.xml.bak
+    - phpunit --migrate-configuration
+    - phpunit --coverage-text --colors
