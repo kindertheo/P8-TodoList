@@ -12,3 +12,5 @@ script:
   - vendor/bin/phpunit
 services: 
   - mysql
+
+  
