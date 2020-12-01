@@ -14,4 +14,4 @@ install:
 services: 
   - mysql
 script:
-    - ./vendor/bin/simple-phpunit --coverage-text --colors 
+    - phpunit tests/ --coverage-text --colors 
