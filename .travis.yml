@@ -7,11 +7,11 @@ os:
 php: 
   - "7.4"
 install:
-    - composer install --prefer-dist --no-interaction --dev
+    - composer install --prefer-dist --no-interaction 
     - php bin/console doctrine:database:create --env=test
     - php bin/console doctrine:schema:update --force --env=test
     - php bin/console doctrine:fixtures:load -n --env=test
 services: 
   - mysql
 script:
-    - phpunit tests/ --coverage-text --colors 
+    - phpunit --coverage-text --colors 
