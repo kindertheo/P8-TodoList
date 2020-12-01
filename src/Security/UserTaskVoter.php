@@ -12,11 +12,12 @@ class UserTaskVoter extends Voter
     // these strings are just invented: you can use anything
     const VIEW = 'view';
     const EDIT = 'edit';
+    const DELETE = 'delete';
 
     protected function supports($attribute, $subject)
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, array(self::VIEW, self::EDIT))) {
+        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::DELETE))) {
             return false;
         }
 
@@ -46,6 +47,8 @@ class UserTaskVoter extends Voter
                 return $this->canView($post, $user);
             case self::EDIT:
                 return $this->canEdit($post, $user);
+            case self::DELETE:
+                return $this->canDelete($post, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -64,6 +67,16 @@ class UserTaskVoter extends Voter
     }
 
     private function canEdit(Task $task, User $user)
+    {
+        // this assumes that the data object has a getOwner() method
+        // to get the entity of the user who owns this data object
+        if($user === $task->getAuthor() OR $user->getUserRole() === "ROLE_ADMIN"){
+            return true;
+        }
+        return false;
+    }
+
+        private function canDelete(Task $task, User $user)
     {
         // this assumes that the data object has a getOwner() method
         // to get the entity of the user who owns this data object

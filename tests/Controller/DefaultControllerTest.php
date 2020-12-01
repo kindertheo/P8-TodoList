@@ -18,6 +18,6 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertStringContainsString('Créer un utilisateur', $crawler->filter('.btn.btn-primary')->text());
+        $this->assertStringContainsString("Bienvenue sur Todo List", $crawler->filter("h1")->text() );
     }
 }

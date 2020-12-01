@@ -77,16 +77,20 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
      */
-    public function toggleTaskAction(Task $task)
+    public function toggleTaskAction(Task $task, Request $request)
     {
         $this->denyAccessUnlessGranted("edit", $task);
 
         $task->toggle(!$task->isDone());
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        if($task->isDone() === false){
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
+        }else{
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme  faite.', $task->getTitle()));
+        }
 
-        return $this->redirectToRoute('task_list');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
@@ -94,7 +98,7 @@ class TaskController extends AbstractController
      */
     public function deleteTaskAction(Task $task)
     {
-        $this->denyAccessUnlessGranted("edit", $task);
+        $this->denyAccessUnlessGranted("delete", $task);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
@@ -113,6 +117,19 @@ class TaskController extends AbstractController
             ['tasks' => $this->getDoctrine()
                 ->getRepository('App:Task')
                 ->findBy(['isDone' => true])
+            ]);
+    }
+
+
+    /**
+     * @Route("/tasks/notDone/", name="task_not_done")
+     *
+     */
+    public function taskNotDone(){
+        return $this->render('task/list.html.twig',
+            ['tasks' => $this->getDoctrine()
+                ->getRepository('App:Task')
+                ->findBy(['isDone' => false])
             ]);
     }
 }

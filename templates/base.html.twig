@@ -38,9 +38,17 @@
         <!-- Page Content -->
         <div class="container">
             <div class="row">
+                {% if app.user %}
                 <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
 
-                {% if app.user %}
+                <a href="{{ path('user_list') }}" class="btn btn-info">Liste des utilisateurs</a>
+
+                <a href="{{ path('task_list') }}" class="btn btn-success">Créer une nouvelle tâche</a>
+
+                <a href="{{ path('task_not_done') }}" class="btn btn-info">Tâche non terminées</a>
+
+                <a href="{{ path('task_ended') }}" class="btn btn-warning">Tâche terminée</a>
+
                 <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
                 {% endif %}
 
@@ -48,6 +56,8 @@
                 <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
                 {% endif %}
             </div>
+
+            <br />
 
             <div class="row">
                 <div class="col-md-12">
