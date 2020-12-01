@@ -8,13 +8,8 @@ php:
   - "7.4"
 script: 
   - "composer install"
-  - "composer prepare"
+  - php bin/console doctrine:fixtures:load
   - vendor/bin/phpunit
 services: 
   - mysql
 
-env:
-  global:
-    - DB_NAME=TodoList
-    - DB_USER=travis
-    - DB_PASSWORD=
