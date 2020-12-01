@@ -1,19 +1,19 @@
-"language": "php",
-"os": [
-  "linux"
-],
-"dist": "xenial",
-"php": [
-  "7.4"
-],
-"services": [
-  "mysql"
-],
-"before_install": [
-  "mysql -e 'CREATE DATABASE TodoList;'"
-],
-"script": [
-  "composer install",
-  "composer prepare",
-  "vendor/bin/phpunit"
-]
+before_install: 
+  - "mysql -e 'CREATE DATABASE TodoList;'"
+dist: xenial
+language: php
+os: 
+  - linux
+php: 
+  - "7.4"
+install:
+    - composer install --prefer-dist --no-interaction 
+    - php bin/console doctrine:database:create --env=test
+    - php bin/console doctrine:schema:update --force --env=test
+    - php bin/console doctrine:fixtures:load -n --env=test
+services: 
+  - mysql
+script:
+    - composer dump-env prod
+    - phpunit --migrate-configuration
+    - phpunit 
